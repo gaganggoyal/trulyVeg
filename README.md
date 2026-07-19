@@ -1,5 +1,7 @@
 # 🌿 TrulyVeg — Truly Veg. Verified.
 
+**🔴 Live:** [trulyveg.com](https://trulyveg.com)
+
 **The world's independent guide to genuinely vegetarian products.**
 
 TrulyVeg helps vegetarian families look beyond the green dot: spotting hidden animal-derived ingredients (carmine, gelatin, animal rennet, shellac), avoiding synthetic products that pass as food (industrial acetic-acid "vinegar", analogue paneer), and finding the natural, truly-veg swap for each — with guidance on where to buy, online and offline.
@@ -28,6 +30,7 @@ TrulyVeg helps vegetarian families look beyond the green dot: spotting hidden an
 ├── why-veg.html
 ├── store.html
 ├── about.html
+├── 404.html           # branded not-found page
 ├── css/
 │   └── style.css      # full design system (palette, components, responsive)
 └── js/
@@ -45,13 +48,29 @@ python3 -m http.server 8642
 # → http://localhost:8642
 ```
 
-## Going live — checklist
+## Deployment
+
+The site is live at **[trulyveg.com](https://trulyveg.com)**, served as static
+files by [Caddy](https://caddyserver.com/) on a VPS. Caddy handles HTTPS
+automatically via Let's Encrypt (auto-renewing), plus the `www → apex` redirect,
+gzip, the custom 404 page, and asset caching.
+
+- **Files on server:** `/var/www/trulyveg` (mounted into the Caddy container as `/srv/trulyveg`)
+- **DNS:** `trulyveg.com` and `www.trulyveg.com` A records point at the VPS.
+
+**Redeploy** (upload the latest files) — from the project root:
+
+```bash
+rsync -az --delete --exclude='.git' ./ root@<vps>:/var/www/trulyveg/
+```
+
+No build step, no restart needed — Caddy serves the new files immediately.
+
+## Still to do before full launch
 
 - [ ] **Videos:** each video card has `data-video-id=""` — add a YouTube video ID and the card becomes an embedded player on click.
 - [ ] **Waitlist forms:** currently save to `localStorage`. Replace the marked block in `js/main.js` with a `fetch()` to your email service (Mailchimp, ConvertKit, or your own API).
 - [ ] **Placeholder content:** update the stats strip numbers, testimonial names and the contact email (`namaste@trulyveg.com`) with real ones.
-- [ ] **Deploy:** works as-is on GitHub Pages, Netlify or Vercel (static hosting, zero config).
-- [ ] **Domain:** point `trulyveg.com` / `trulyveg.in` at the host.
 
 ## Editorial principles
 
