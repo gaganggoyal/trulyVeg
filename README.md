@@ -1,8 +1,8 @@
-# 🌿 VegVikalp — Truly Veg. Verified.
+# 🌿 TrulyVeg — Truly Veg. Verified.
 
 **The world's independent guide to genuinely vegetarian products.**
 
-*Vikalp* (विकल्प) means "alternative" — and there is always a pure one. VegVikalp helps vegetarian families look beyond the green dot: spotting hidden animal-derived ingredients (carmine, gelatin, animal rennet, shellac), avoiding synthetic products that pass as food (industrial acetic-acid "vinegar", analogue paneer), and finding the natural, truly-veg swap for each — with guidance on where to buy, online and offline.
+TrulyVeg helps vegetarian families look beyond the green dot: spotting hidden animal-derived ingredients (carmine, gelatin, animal rennet, shellac), avoiding synthetic products that pass as food (industrial acetic-acid "vinegar", analogue paneer), and finding the natural, truly-veg swap for each — with guidance on where to buy, online and offline.
 
 **Tagline:** *Look beyond the green dot.*
 
@@ -15,7 +15,7 @@
 | `compare.html` | The Swap Guide — 8 detailed side-by-side comparisons (synthetic vs fermented vinegar, gelatin vs agar-agar, animal vs vegetarian rennet, fish oil vs algal omega-3, and more) |
 | `hidden-nonveg.html` | The Hidden Non-Veg List — E-code reference table, FSSAI veg/vegan mark explainer, 5-step label-reading method, myth-busting FAQ |
 | `why-veg.html` | Why Vegetarian — verses from the Vedas, Manusmriti, Bhagavad Gita and Upanishads with citations; sattvic food philosophy; modern research; a 4-week starter plan |
-| `store.html` | VegVikalp Store — "Launching Soon" page with waitlist, opening collection, brand promises and roadmap |
+| `store.html` | TrulyVeg Store — "Launching Soon" page with waitlist, opening collection, brand promises and roadmap |
 | `about.html` | Origin story, mission, values, and the 3-gate verification methodology |
 
 ## Project structure
@@ -49,9 +49,9 @@ python3 -m http.server 8642
 
 - [ ] **Videos:** each video card has `data-video-id=""` — add a YouTube video ID and the card becomes an embedded player on click.
 - [ ] **Waitlist forms:** currently save to `localStorage`. Replace the marked block in `js/main.js` with a `fetch()` to your email service (Mailchimp, ConvertKit, or your own API).
-- [ ] **Placeholder content:** update the stats strip numbers, testimonial names and the contact email (`namaste@vegvikalp.com`) with real ones.
+- [ ] **Placeholder content:** update the stats strip numbers, testimonial names and the contact email (`namaste@trulyveg.com`) with real ones.
 - [ ] **Deploy:** works as-is on GitHub Pages, Netlify or Vercel (static hosting, zero config).
-- [ ] **Domain:** point `vegvikalp.com` / `vegvikalp.in` at the host.
+- [ ] **Domain:** point `trulyveg.com` / `trulyveg.in` at the host.
 
 ## Editorial principles
 
@@ -61,8 +61,8 @@ python3 -m http.server 8642
 
 ## Disclaimer
 
-VegVikalp provides educational information, not medical advice. Ingredient sourcing varies by manufacturer and country and changes over time — always verify the label and veg mark on the exact pack you buy.
+TrulyVeg provides educational information, not medical advice. Ingredient sourcing varies by manufacturer and country and changes over time — always verify the label and veg mark on the exact pack you buy.
 
 ---
 
-© 2026 VegVikalp. Made with ahimsa in India, for the world.
+© 2026 TrulyVeg. Made with ahimsa in India, for the world.

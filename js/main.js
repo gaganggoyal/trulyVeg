@@ -1,4 +1,4 @@
-/* VegVikalp — shared interactions */
+/* TrulyVeg — shared interactions */
 (function () {
   "use strict";
 
