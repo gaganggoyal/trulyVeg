@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Label Scanner (Beta) — Snap an ingredient label, spot the hidden non-veg | TrulyVeg</title>
+  <meta name="description" content="Point your camera at any ingredient list and TrulyVeg reads it on your device — flagging carmine, gelatin, shellac, rennet, synthetic azo colours and illegal adulterants. Nothing is uploaded; the photo never leaves your phone.">
+  <link rel="canonical" href="https://trulyveg.com/label-scanner.html">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="TrulyVeg">
+  <meta name="theme-color" content="#1b4332">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TrulyVeg">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Label Scanner (Beta) — Spot Hidden Non-Veg on Any Label">
+  <meta property="og:description" content="Point your camera at any ingredient list and TrulyVeg reads it on your device — flagging carmine, gelatin, shellac, rennet, synthetic colours and illegal adulterants. The photo never leaves your phone.">
+  <meta property="og:url" content="https://trulyveg.com/label-scanner.html">
+  <meta property="og:image" content="https://trulyveg.com/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TrulyVeg — Truly Veg. Verified.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Label Scanner (Beta) — Spot Hidden Non-Veg | TrulyVeg">
+  <meta name="twitter:description" content="Snap an ingredient label and TrulyVeg reads it on-device to flag hidden non-veg ingredients. Nothing is uploaded.">
+  <meta name="twitter:image" content="https://trulyveg.com/img/og-image.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="TrulyVeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="topbar">🔎 <strong>New — Label Scanner (Beta).</strong> Reads labels on your device. Your photo never leaves your phone.</div>
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20C5 11 11 4 20 4c0 9-6 16-15 16z"/><path d="M5 20C7.5 14 11.5 9.5 17 7"/></svg>Truly<em>Veg</em></a>
+      <nav class="nav" id="nav">
+        <a href="products.html">Products</a>
+        <a href="compare.html">Swap Guide</a>
+        <a href="hidden-nonveg.html">Hidden Non-Veg</a>
+        <a href="why-veg.html">Why Vegetarian</a>
+        <a href="about.html">About</a>
+        <a class="nav-store" href="store.html">Our Store <span class="soon-badge">Soon</span></a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="color:var(--green-300)">Label Scanner · Beta</span>
+      <h1>Snap a label. See what’s hiding.</h1>
+      <p class="lead">Point your camera at any ingredient list — or upload a photo — and TrulyVeg reads the text right here on your device, then checks every ingredient against the Hidden Non-Veg list: carmine, gelatin, shellac, rennet, the ambiguous “yellow” codes, synthetic azo colours and illegal adulterants.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="scanner">
+
+        <!-- ---------- Input side ---------- -->
+        <div class="scan-panel">
+          <h3>1 · Add a label photo</h3>
+          <p class="lead">Use a straight, well-lit, close-up shot of the ingredients list for the best read.</p>
+
+          <label class="dropzone" id="dropzone" for="fileInput">
+            <span class="dz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+            <strong>Tap to take a photo or choose a file</strong>
+            <span>You can also drag an image here, or paste from the clipboard</span>
+          </label>
+          <input type="file" id="fileInput" accept="image/*" capture="environment" hidden>
+
+          <div class="scan-preview" id="preview" hidden><img id="previewImg" alt="Selected label"></div>
+
+          <div class="scan-actions" id="actions" hidden>
+            <button class="btn btn-primary" id="scanBtn" type="button">Read this label</button>
+            <button class="btn btn-outline" id="resetBtn" type="button">Clear</button>
+          </div>
+
+          <div class="scan-progress" id="progress" hidden>
+            <div class="bar"><i id="progressBar"></i></div>
+            <div class="bar-label" id="progressLabel">Warming up the reader…</div>
+          </div>
+
+          <p class="privacy-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>100% on-device. The image is processed in your browser using open-source OCR — it is never uploaded to any server.</span>
+          </p>
+        </div>
+
+        <!-- ---------- Results side ---------- -->
+        <div class="scan-panel" id="resultPanel">
+          <h3>2 · What we found</h3>
+          <p class="scan-empty" id="emptyState">Add a label and tap <b>Read this label</b>. Results appear here.</p>
+          <div id="results" hidden>
+            <div class="verdict" id="verdict"></div>
+            <ul class="findings" id="findings"></ul>
+            <details class="raw-text" id="rawWrap" hidden>
+              <summary>Show the raw text we read</summary>
+              <pre id="rawText"></pre>
+            </details>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="privacy-note" style="max-width:760px;margin-top:34px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        <span><b>Beta — always confirm on the pack.</b> OCR can misread small or curved print, and ingredient sourcing changes by manufacturer and country. Use this as a first pass, then read the label and veg mark yourself. See <a href="hidden-nonveg.html">the full Hidden Non-Veg list</a> and <a href="compare.html">the Swap Guide</a>.</span>
+      </p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Truly<em>Veg</em></div>
+          <p>The world’s independent guide to genuinely vegetarian products.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <a href="products.html">Verified Products</a>
+          <a href="compare.html">Swap Guide</a>
+          <a href="hidden-nonveg.html">Hidden Non-Veg List</a>
+          <a href="label-scanner.html">Label Scanner</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="about.html">About &amp; Methodology</a>
+          <a href="store.html">Our Store (Soon)</a>
+        </div>
+        <div>
+          <h4>Disclaimer</h4>
+          <p class="disclaimer">The Label Scanner reads text on your device and is provided for educational guidance only. It is not a substitute for reading the pack, its ingredient list and its veg mark.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 TrulyVeg. Made with ahimsa in India, for the world.</span>
+        <span>🟢 Look beyond the green dot.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/vendor/tesseract.min.js"></script>
+  <script src="js/label-scanner.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var S = window.TrulyVegScanner;
+    var fileInput = document.getElementById("fileInput");
+    var dropzone  = document.getElementById("dropzone");
+    var preview   = document.getElementById("preview");
+    var previewImg= document.getElementById("previewImg");
+    var actions   = document.getElementById("actions");
+    var scanBtn   = document.getElementById("scanBtn");
+    var resetBtn  = document.getElementById("resetBtn");
+    var progress  = document.getElementById("progress");
+    var progressBar   = document.getElementById("progressBar");
+    var progressLabel = document.getElementById("progressLabel");
+    var emptyState= document.getElementById("emptyState");
+    var results   = document.getElementById("results");
+    var verdict   = document.getElementById("verdict");
+    var findings  = document.getElementById("findings");
+    var rawWrap   = document.getElementById("rawWrap");
+    var rawText   = document.getElementById("rawText");
+    var currentFile = null;
+
+    function setFile(file) {
+      if (!file || !/^image\//.test(file.type)) return;
+      currentFile = file;
+      previewImg.src = URL.createObjectURL(file);
+      preview.hidden = false;
+      actions.hidden = false;
+      results.hidden = true;
+      emptyState.hidden = false;
+      progress.hidden = true;
+    }
+
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files && fileInput.files[0]) setFile(fileInput.files[0]);
+    });
+
+    /* Drag & drop */
+    ["dragenter", "dragover"].forEach(function (ev) {
+      dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add("drag"); });
+    });
+    ["dragleave", "drop"].forEach(function (ev) {
+      dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.remove("drag"); });
+    });
+    dropzone.addEventListener("drop", function (e) {
+      if (e.dataTransfer && e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
+    });
+
+    /* Paste from clipboard */
+    window.addEventListener("paste", function (e) {
+      var items = e.clipboardData && e.clipboardData.items;
+      if (!items) return;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image") === 0) { setFile(items[i].getAsFile()); break; }
+      }
+    });
+
+    resetBtn.addEventListener("click", function () {
+      currentFile = null;
+      fileInput.value = "";
+      preview.hidden = true;
+      actions.hidden = true;
+      progress.hidden = true;
+      results.hidden = true;
+      emptyState.hidden = false;
+    });
+
+    scanBtn.addEventListener("click", function () {
+      if (!currentFile) return;
+      scanBtn.disabled = true;
+      progress.hidden = false;
+      progressBar.style.width = "0%";
+      progressLabel.textContent = "Reading the label…";
+
+      S.scan(currentFile, function (p) {
+        var pct = Math.round(p * 100);
+        progressBar.style.width = pct + "%";
+        progressLabel.textContent = "Reading the label… " + pct + "%";
+      }).then(function (out) {
+        render(out);
+      }).catch(function (err) {
+        progressLabel.textContent = "Sorry — could not read that image. Try a clearer, closer photo.";
+        console.error(err);
+      }).then(function () {
+        scanBtn.disabled = false;
+      });
+    });
+
+    function render(out) {
+      progress.hidden = true;
+      emptyState.hidden = true;
+      results.hidden = false;
+
+      var f = out.findings;
+      var hasHard = f.some(function (x) { return x.cat === "nonveg" || x.cat === "illegal"; });
+      var hasSoft = f.length > 0;
+
+      if (hasHard) {
+        verdict.className = "verdict verdict-danger";
+        verdict.innerHTML = "<h3>⚠️ Not truly veg</h3><p>This label appears to contain animal-derived or unsafe ingredients. Check the pack and its veg mark carefully before buying.</p>";
+      } else if (hasSoft) {
+        verdict.className = "verdict verdict-warn";
+        verdict.innerHTML = "<h3>Check the label</h3><p>Nothing outright animal-derived, but there are ambiguous or synthetic ingredients that only the pack’s veg mark can resolve.</p>";
+      } else {
+        verdict.className = "verdict verdict-ok";
+        verdict.innerHTML = "<h3>🌿 Nothing flagged</h3><p>We didn’t spot any known non-veg, synthetic or adulterant ingredient in the text we read. Faint print can still be missed — do glance at the pack.</p>";
+      }
+
+      findings.innerHTML = "";
+      f.forEach(function (item) {
+        var meta = S.CAT_META[item.cat];
+        var badgeClass = meta.tone === "danger" ? "badge-no" : "badge-warn";
+        var li = document.createElement("li");
+        li.className = "finding";
+        li.innerHTML =
+          '<div class="finding-head"><strong></strong>' +
+          '<span class="badge ' + badgeClass + '"></span></div>' +
+          '<p class="finding-what"></p>' +
+          '<p class="finding-swap"><b>Truly-veg swap:</b> <span></span></p>';
+        li.querySelector(".finding-head strong").textContent = item.name;
+        li.querySelector(".badge").textContent = meta.label;
+        li.querySelector(".finding-what").textContent = item.what;
+        li.querySelector(".finding-swap span").textContent = item.swap;
+        findings.appendChild(li);
+      });
+
+      rawText.textContent = (out.text || "").trim() || "(no text detected)";
+      rawWrap.hidden = false;
+    }
+  })();
+  </script>
+</body>
+</html>

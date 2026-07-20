@@ -92,3 +92,109 @@
     });
   });
 })();
+
+/* ============================================================
+   PWA — service-worker registration + "Install app" button.
+   Runs on every page (this file is included site-wide).
+   ============================================================ */
+(function () {
+  "use strict";
+
+  /* Register the service worker for offline + installability. */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function (e) {
+        /* Non-fatal: the site works fine without it. */
+        console.warn("SW registration failed:", e);
+      });
+    });
+  }
+
+  /* Already installed / running as an app? Then no button. */
+  var standalone = window.matchMedia("(display-mode: standalone)").matches ||
+                   window.navigator.standalone === true;
+  if (standalone) return;
+
+  /* Respect a previous dismissal for ~30 days. */
+  try {
+    var until = parseInt(localStorage.getItem("tv-install-dismissed") || "0", 10);
+    if (until && Date.now() < until) return;
+  } catch (e) { /* storage blocked — carry on */ }
+
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) &&
+              !window.MSStream;
+  var deferredPrompt = null;
+  var ui = null;
+
+  function buildUI() {
+    if (ui) return ui;
+    ui = document.createElement("div");
+    ui.className = "pwa-install";
+    ui.innerHTML =
+      '<button class="pwa-install-btn" type="button">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>' +
+      '<span>Install app</span></button>' +
+      '<button class="pwa-install-close" type="button" aria-label="Dismiss">&times;</button>';
+    document.body.appendChild(ui);
+
+    ui.querySelector(".pwa-install-close").addEventListener("click", function () {
+      hide();
+      try {
+        localStorage.setItem("tv-install-dismissed",
+          String(Date.now() + 30 * 24 * 60 * 60 * 1000));
+      } catch (e) {}
+    });
+
+    ui.querySelector(".pwa-install-btn").addEventListener("click", onInstallClick);
+    return ui;
+  }
+
+  function show() { buildUI().classList.add("show"); }
+  function hide() { if (ui) ui.classList.remove("show"); }
+
+  function onInstallClick() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        hide();
+      });
+    } else if (isIOS) {
+      showIOSHint();
+    }
+  }
+
+  /* iOS Safari has no beforeinstallprompt — guide the user instead. */
+  function showIOSHint() {
+    var hint = document.createElement("div");
+    hint.className = "pwa-ios-hint";
+    hint.innerHTML =
+      '<p>Install TrulyVeg on your iPhone:</p>' +
+      '<p>Tap <strong>Share</strong> ' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="m8 7 4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>' +
+      ' then <strong>Add to Home Screen</strong>.</p>' +
+      '<button type="button" class="pwa-ios-close">Got it</button>';
+    document.body.appendChild(hint);
+    requestAnimationFrame(function () { hint.classList.add("show"); });
+    hint.querySelector(".pwa-ios-close").addEventListener("click", function () {
+      hint.remove();
+    });
+  }
+
+  /* Chromium / Android / desktop path. */
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    show();
+  });
+
+  window.addEventListener("appinstalled", function () {
+    deferredPrompt = null;
+    hide();
+  });
+
+  /* iOS never fires beforeinstallprompt — offer the button anyway. */
+  if (isIOS) {
+    window.addEventListener("load", function () { show(); });
+  }
+})();

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://trulyveg.com/sitemap.xml
