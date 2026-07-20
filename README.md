@@ -13,10 +13,10 @@ TrulyVeg helps vegetarian families look beyond the green dot: spotting hidden an
 | Page | Purpose |
 |---|---|
 | `index.html` | Homepage — brand story, featured swaps, video reviews, store teaser |
-| `products.html` | Directory of 20 verified truly-veg products in 5 filterable categories, with label tells, price ranges and buy suggestions |
-| `compare.html` | The Swap Guide — 8 detailed side-by-side comparisons (synthetic vs fermented vinegar, gelatin vs agar-agar, animal vs vegetarian rennet, fish oil vs algal omega-3, and more) |
-| `hidden-nonveg.html` | The Hidden Non-Veg List — E-code reference table, FSSAI veg/vegan mark explainer, 5-step label-reading method, myth-busting FAQ |
-| `why-veg.html` | Why Vegetarian — verses from the Vedas, Manusmriti, Bhagavad Gita and Upanishads with citations; sattvic food philosophy; modern research; a 4-week starter plan |
+| `products.html` | Directory of 25 verified truly-veg products in 5 filterable categories, with label tells, price ranges and buy suggestions |
+| `compare.html` | The Swap Guide — 14 detailed side-by-side comparisons (synthetic vs fermented vinegar, gelatin vs agar-agar, animal vs vegetarian rennet, synthetic vs plant colours, vanaspati vs cold-pressed oil & ghee, analogue vs real paneer, synthetic vs natural vanilla, and more) |
+| `hidden-nonveg.html` | The Hidden Non-Veg List — animal-derived E-code table, synthetic petroleum/azo-dye and illegal-adulterant-colour tables, FSSAI veg/vegan mark explainer, 5-step label-reading method, myth-busting FAQ |
+| `why-veg.html` | Why Vegetarian — verses from the Vedas, Manusmriti, Bhagavad Gita and Upanishads, plus the scriptures of ancient Greece, Jainism, Buddhism, the Bible, Taoism and the Qur'an, all with citations; sattvic food philosophy; modern research; a 4-week starter plan |
 | `store.html` | TrulyVeg Store — "Launching Soon" page with waitlist, opening collection, brand promises and roadmap |
 | `about.html` | Origin story, mission, values, and the 3-gate verification methodology |
 
